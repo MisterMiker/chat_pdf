@@ -20,6 +20,19 @@ try:
 except Exception as e:
     st.warning(f"No se pudo cargar la imagen: {e}")
 
+# PDF download section
+st.markdown("### 📥 Descarga el PDF de ejemplo (Glorp)")
+try:
+    with open("Glorp.pdf", "rb") as f:
+        st.download_button(
+            label="Descargar Glorp.pdf",
+            data=f,
+            file_name="Glorp.pdf",
+            mime="application/pdf"
+        )
+except FileNotFoundError:
+    st.warning("No se encontró el archivo Glorp.pdf en el repositorio.")
+
 # Sidebar information
 with st.sidebar:
     st.subheader("Este Agente te ayudará a realizar análisis sobre el PDF cargado")
@@ -68,7 +81,6 @@ if pdf is not None and ke:
             docs = knowledge_base.similarity_search(user_question)
             
             # Use a current model instead of deprecated text-davinci-003
-            # Options: "gpt-3.5-turbo-instruct" or "gpt-4-turbo-preview" depending on your API access
             llm = OpenAI(temperature=0, model_name="gpt-4o")
             
             # Load QA chain
@@ -90,3 +102,4 @@ elif pdf is not None and not ke:
     st.warning("Por favor ingresa tu clave de API de OpenAI para continuar")
 else:
     st.info("Por favor carga un archivo PDF para comenzar")
+
