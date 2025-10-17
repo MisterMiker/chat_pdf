@@ -12,7 +12,7 @@ import platform
 # App title and presentation
 st.title('Sube este PDF y preguntame lo que quieras sobre los Glorps')
 st.write("Versión de Python:", platform.python_version())
-            st.subheader("Hola soy un Glorp")
+st.subheader("Hola soy un Glorp")
 # Load and display image
 try:
     image = Image.open('images.jpeg')
